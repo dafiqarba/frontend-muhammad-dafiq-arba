@@ -43,7 +43,7 @@ All data is fetched from a live API and updates automatically based on user inte
 
 Fixed by creating proxy API, changes can be seen on this branch: `feat-proxied-request`
 
-[Live demo](https://frontend-muhammad-dafiq-git-87d448-dafiqarbas-projects-b75db4f5.vercel.app/)
+[Live demo]([https://frontend-muhammad-dafiq-git-87d448-dafiqarbas-projects-b75db4f5.vercel.app/](https://frontend-muhammad-dafiq-git-87d448-dafiqarbas-projects-b75db4f5.vercel.app?_vercel_share=mTltxeaX4PiHMkTIc40PWNDRmolBxguN))
 
 
 ## 🛠️ Getting Started
