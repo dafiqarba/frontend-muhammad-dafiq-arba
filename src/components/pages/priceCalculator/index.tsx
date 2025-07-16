@@ -42,15 +42,15 @@ const PriceCalculator = () => {
   })
 
   const { data: ports } = useQuery({
+    enabled: !!inputField.country.value,
     queryKey: ['ports', inputField.country.value],
     queryFn: async () => fetchPorts(inputField?.country?.value),
-    enabled: !!inputField.country.value,
   })
 
   const { data: goods } = useQuery({
+    enabled: !!inputField.port.value,
     queryKey: ['goods', inputField.port.value],
     queryFn: async () => fetchGoods(inputField?.port?.value),
-    enabled: !!inputField.port.value,
   })
 
   const handleChangeAutocomplete = (
@@ -98,6 +98,7 @@ const PriceCalculator = () => {
           <label className="block text-sm font-medium text-gray-700">Negara</label>
           <AutoComplete
             className="w-full !mt-1"
+            placeholder="Pilih Negara"
             value={inputField.country.label || ''}
             options={
               countries?.map((country: Countries) => ({
@@ -108,7 +109,6 @@ const PriceCalculator = () => {
             onChange={(value, option) =>
               handleChangeAutocomplete(value, option, 'country')
             }
-            placeholder="Pilih Negara"
           />
         </div>
 
@@ -116,16 +116,16 @@ const PriceCalculator = () => {
           <label className="block text-sm font-medium text-gray-700">Pelabuhan</label>
           <AutoComplete
             className="w-full !mt-1"
+            placeholder="Pilih Pelabuhan"
+            value={inputField.port.label || ''}
+            disabled={!inputField.country.value}
             options={
               ports?.map((port: Ports) => ({
                 label: port.nama_pelabuhan,
                 value: String(port.id_pelabuhan),
               })) || []
             }
-            value={inputField.port.label || ''}
             onChange={(value, option) => handleChangeAutocomplete(value, option, 'port')}
-            disabled={!inputField.country.value}
-            placeholder="Pilih Pelabuhan"
           />
         </div>
 
@@ -133,18 +133,18 @@ const PriceCalculator = () => {
           <label className="block text-sm font-medium text-gray-700">Barang</label>
           <AutoComplete
             className="w-full !mt-1"
+            placeholder="Pilih Barang"
+            disabled={!inputField.port.value}
             options={
               goods?.map((good: Goods) => ({
+                harga: good.harga,
+                diskon: good.diskon,
                 label: good.nama_barang,
                 value: String(good.id_barang),
                 description: good.description,
-                diskon: good.diskon,
-                harga: good.harga,
               })) || []
             }
             onChange={(value, option) => handleChangeAutocomplete(value, option, 'goods')}
-            placeholder="Pilih Barang"
-            disabled={!inputField.port.value}
           />
         </div>
 
@@ -158,8 +158,8 @@ const PriceCalculator = () => {
           <div className="flex flex-col w-full">
             <label className="block text-sm font-medium text-gray-700">Harga</label>
             <InputNumber<number>
-              className="!w-full !mt-1"
               min={0}
+              className="!w-full !mt-1"
               value={editableField.harga || 0}
               onChange={(value) => handleChangeEditableField(value, 'harga')}
             />
@@ -167,11 +167,11 @@ const PriceCalculator = () => {
           <div className="flex flex-col w-full">
             <label className="block text-sm font-medium text-gray-700">Diskon</label>
             <InputNumber<number>
-              className="w-full !mt-1"
               min={0}
-              value={editableField.diskon || 0}
               max={100}
               addonAfter="%"
+              className="w-full !mt-1"
+              value={editableField.diskon || 0}
               onChange={(value) => handleChangeEditableField(value, 'diskon')}
             />
           </div>
@@ -180,11 +180,11 @@ const PriceCalculator = () => {
         <div className="w-full">
           <label className="block text-sm font-medium text-gray-700">Total</label>
           <InputNumber<number>
-            disabled
-            value={getTotalPrice(editableField.harga || 0, editableField.diskon || 0)}
-            className="!w-full !mt-1"
-            defaultValue={0}
             min={0}
+            disabled
+            defaultValue={0}
+            className="!w-full !mt-1"
+            value={getTotalPrice(editableField.harga || 0, editableField.diskon || 0)}
           />
         </div>
       </div>

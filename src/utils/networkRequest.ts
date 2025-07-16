@@ -1,5 +1,5 @@
-import { BASE_API_URL, COUNTRIES, GOODS, PORTS } from '@/constants'
 import { getQuery } from './strings'
+import { BASE_API_URL, COUNTRIES, GOODS, PORTS } from '@/constants'
 
 export const fetchCountry = async () => {
   const response = await fetch(`${BASE_API_URL}/${COUNTRIES}`)

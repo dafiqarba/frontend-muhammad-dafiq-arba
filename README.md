@@ -40,8 +40,6 @@ All data is fetched from a live API and updates automatically based on user inte
 
 ## 🚀 Live Demo
 
----
-
 ## 🛠️ Getting Started
 
 ### Prerequisites
