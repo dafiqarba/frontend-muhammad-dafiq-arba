@@ -39,6 +39,7 @@ All data is fetched from a live API and updates automatically based on user inte
 ---
 
 ## 🚀 Live Demo
+Currently unavailable since the Live API using http, the request will be blocked by browser due to security policies
 
 ## 🛠️ Getting Started
 
